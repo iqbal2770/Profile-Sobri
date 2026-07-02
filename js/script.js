@@ -385,3 +385,36 @@ window.addEventListener(
     "load",
     showNotification
 );
+
+// ======================
+// PWA INSTALLATION
+// ======================
+
+let deferredPrompt;
+const installBtn = document.getElementById("pwa-install-btn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+        installBtn.style.display = "block";
+    }
+});
+
+if (installBtn) {
+    installBtn.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User choice PWA: ${outcome}`);
+        deferredPrompt = null;
+        installBtn.style.display = "none";
+    });
+}
+
+window.addEventListener("appinstalled", () => {
+    console.log("PWA berhasil dipasang di layar utama!");
+    if (installBtn) {
+        installBtn.style.display = "none";
+    }
+});
