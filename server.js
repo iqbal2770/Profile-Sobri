@@ -38,7 +38,7 @@ app.get("/vercel.json", (req, res) => {
 });
 
 // Mengarahkan route root ke index.html
-app.get("*", (req, res, next) => {
+app.use((req, res, next) => {
   // Lewati jika request diawali dengan /api
   if (req.path.startsWith("/api")) {
     return next();
