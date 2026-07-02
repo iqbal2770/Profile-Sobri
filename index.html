@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Sobri Iqbal Sutiyono</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+
+    
+    <div id="login-page" class="login-container">
+
+        <div class="login-card">
+
+            <h1>LOGIN CMS</h1>
+
+            <p class="login-subtitle">
+                KUY LOGIN
+            </p>
+
+            <form id="login-form">
+
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username">
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password"><br>
+                </div>
+
+                <button type="submit">Masuk CMS</button>
+
+            </form>
+
+            <div class="dummy-box">
+                <h3>Dummy Login</h3>
+                <p>Username : <strong>admin</strong></p>
+                <p>Password : <strong>12345</strong></p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    
+    <div id="cms-page" style="display:none;">
+
+        <header>
+
+            <div>
+                <h1 id="main-title">SOBRI IQBAL SUTIYONO</h1>
+                <p class="header-subtitle">
+                    Personal Website & CMS Dashboard
+                </p>
+            </div>
+
+            <button id="logout-btn">Logout</button>
+
+        </header>
+
+
+        <main>
+
+            
+            <section class="modern-card profile-card">
+
+                <div class="profile-content">
+
+                    <div>
+                        <h2>Profile Saya</h2>
+
+                        <p>
+                            Halo! Nama saya
+                            <strong>SOBRI IQBAL SUTIYONO</strong>.
+                            Saya berusia 19 tahun dan berasal dari Bantarsari, Cilacap.
+                            Saat ini saya sedang menempuh pendidikan di
+                            Universitas Nahdlatul Ulama Al Ghazali
+                            prodi Informatika.
+                        </p>
+                    </div>
+
+                    <img src="images/iqbal.jpeg" alt="Foto Profil" class="profile-img">
+
+                </div>
+
+            </section>
+
+
+            
+            <section class="modern-card">
+
+                <h2>Tentang Saya</h2>
+
+                <p>
+                    Saya adalah seorang mahasiswa yang memiliki minat besar
+                    dalam bidang teknologi. Saya juga sangat antusias dalam
+                    belajar hal-hal baru terutama di dunia programming
+                    dan pengembangan website.
+                </p>
+
+            </section>
+
+
+            
+            <section class="modern-card">
+
+                <h2>Hobi Saya</h2>
+
+                <ul>
+                    <li>Bermain Game</li>
+                    <li>Olahraga</li>
+                    <li>Belajar Coding</li>
+                </ul>
+
+            </section>
+
+
+            
+            <section class="modern-card">
+
+                <h2>My Top 3 Goals</h2>
+
+                <ol>
+                    <li>Lulus Tepat Waktu</li>
+                    <li>Menguasai Programming</li>
+                    <li>Bekerja di Bidang IT</li>
+                </ol>
+
+            </section>
+
+
+            
+            <section class="modern-card">
+
+                <h2>Favourite Things</h2>
+
+                <table>
+
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Favorit</th>
+                    </tr>
+
+                    <tr>
+                        <td>Makanan</td>
+                        <td>Nasi Goreng</td>
+                    </tr>
+
+                    <tr>
+                        <td>Buku</td>
+                        <td>Berandal Bermoral</td>
+                    </tr>
+
+                </table>
+
+            </section>
+
+            <section class="modern-card">
+                <h2>Lokasi Saya</h2>
+                <p>
+                     Lokasi saya saat ini ditampilkan menggunakan
+                     Geolocation API dan OpenStreetMap.
+                    </p>
+                    <div id="map"></div>
+            </section>
+
+
+            
+            <section class="modern-card">
+
+                <h2>Dashboard CMS Artikel</h2>
+
+                <p class="cms-desc">
+                    GAS TAMBAH ARTIKEL
+                </p>
+
+                <form id="article-form">
+
+                    <div class="input-group">
+                        <label>Judul Artikel</label>
+                        <input type="text" id="article-title" placeholder="Masukkan judul artikel">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Isi Artikel</label>
+                        <textarea id="article-content" placeholder="Tulis isi artikel"></textarea>
+                    </div>
+
+                    <button type="submit">
+                        Publish Artikel
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            
+            <section class="modern-card">
+
+                <h2>Artikel Saya</h2>
+
+                <div id="article-list">
+
+                    <p class="empty-text">
+                        Belum ada artikel dipublish.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+           
+            <section class="modern-card contact-section">
+
+                <h2>Hubungi Tim Kami</h2>
+
+                <p class="subtitle">
+                    Isi form berikut dan kami akan menghubungi Anda
+                    dalam 24 jam
+                </p>
+
+                <form class="contact-form">
+
+                    <div class="input-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" placeholder="Sobri Iqbal">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="sobri@gmail.com">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Phone Number</label>
+
+                        <div class="phone-input">
+                            <span class="flag">🇮🇩 +62</span>
+                            <input type="text" placeholder="0812xxxx">
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+
+                        <div class="input-group">
+                            <label>Nama Perusahaan</label>
+                            <input type="text" placeholder="PT Maju Jaya">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Jumlah Karyawan</label>
+
+                            <select>
+                                <option>Pilih jumlah karyawan</option>
+                                <option>1-10</option>
+                                <option>11-50</option>
+                                <option>51-100</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Layanan yang Dibutuhkan</label>
+
+                        <select>
+                            <option>Pilih layanan</option>
+                            <option>Web Development</option>
+                            <option>Mobile App</option>
+                            <option>UI/UX Design</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Pertanyaan</label>
+
+                        <textarea placeholder="Tulis pertanyaan disini"></textarea>
+
+                    </div>
+
+                    <button type="submit">
+                        Submit
+                    </button>
+
+                </form>
+
+            </section>
+
+        </main>
+
+
+        <footer>
+            <p>&copy; 2026 Sobri Iqbal Sutiyono | CMS Website Modern</p>
+        </footer>
+
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
