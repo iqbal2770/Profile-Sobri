@@ -392,50 +392,61 @@ window.addEventListener(
 
 let deferredPrompt;
 const installBtn = document.getElementById("pwa-install-btn");
+const installBtnHeader = document.getElementById("pwa-install-btn-header");
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-// Tampilkan tombol instalasi secara default jika dibuka di browser biasa (bukan mode standalone PWA)
-if (installBtn) {
+function showInstallButtons() {
     if (!isStandalone) {
-        installBtn.style.display = "block";
+        if (installBtn) installBtn.style.display = "block";
+        if (installBtnHeader) installBtnHeader.style.display = "block";
     } else {
-        installBtn.style.display = "none";
+        if (installBtn) installBtn.style.display = "none";
+        if (installBtnHeader) installBtnHeader.style.display = "none";
     }
 }
+
+function hideInstallButtons() {
+    if (installBtn) installBtn.style.display = "none";
+    if (installBtnHeader) installBtnHeader.style.display = "none";
+}
+
+// Tampilkan tombol instalasi secara default jika dibuka di browser biasa (bukan mode standalone PWA)
+showInstallButtons();
 
 window.addEventListener("beforeinstallprompt", (e) => {
     // Cegah mini-infobar default muncul di mobile
     e.preventDefault();
     deferredPrompt = e;
     // Pastikan tombol tampil
-    if (installBtn) {
-        installBtn.style.display = "block";
-    }
+    showInstallButtons();
 });
 
+const handleInstallClick = async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User choice PWA: ${outcome}`);
+        deferredPrompt = null;
+        hideInstallButtons();
+    } else {
+        // Tampilkan panduan cara instal manual jika beforeinstallprompt belum terpicu (misal di iOS, Incognito, dll)
+        alert(
+            "Untuk memasang aplikasi ini ke Desktop/Layar Utama secara cepat:\n\n" +
+            "1. Di Laptop/PC: Klik ikon 'Instal' (gambar monitor dengan panah ke bawah) di bagian kanan kolom URL (Address Bar) browser Chrome/Edge Anda.\n\n" +
+            "2. Di HP Android (Chrome): Klik tombol menu (titik tiga) di pojok kanan atas browser, lalu pilih 'Instal Aplikasi' atau 'Tambahkan ke Layar Utama'.\n\n" +
+            "3. Di iPhone/iOS (Safari): Klik tombol 'Share' (ikon persegi dengan panah ke atas) di bagian bawah browser Safari, lalu pilih 'Add to Home Screen'."
+        );
+    }
+};
+
 if (installBtn) {
-    installBtn.addEventListener("click", async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User choice PWA: ${outcome}`);
-            deferredPrompt = null;
-            installBtn.style.display = "none";
-        } else {
-            // Tampilkan panduan cara instal manual jika beforeinstallprompt belum terpicu (misal di iOS, Incognito, dll)
-            alert(
-                "Untuk memasang aplikasi ini ke Desktop/Layar Utama secara cepat:\n\n" +
-                "1. Di Laptop/PC: Klik ikon 'Instal' (gambar monitor dengan panah ke bawah) di bagian kanan kolom URL (Address Bar) browser Chrome/Edge Anda.\n\n" +
-                "2. Di HP Android (Chrome): Klik tombol menu (titik tiga) di pojok kanan atas browser, lalu pilih 'Instal Aplikasi' atau 'Tambahkan ke Layar Utama'.\n\n" +
-                "3. Di iPhone/iOS (Safari): Klik tombol 'Share' (ikon persegi dengan panah ke atas) di bagian bawah browser Safari, lalu pilih 'Add to Home Screen'."
-            );
-        }
-    });
+    installBtn.addEventListener("click", handleInstallClick);
+}
+if (installBtnHeader) {
+    installBtnHeader.addEventListener("click", handleInstallClick);
 }
 
 window.addEventListener("appinstalled", () => {
     console.log("PWA berhasil dipasang di layar utama!");
-    if (installBtn) {
-        installBtn.style.display = "none";
-    }
+    hideInstallButtons();
 });
