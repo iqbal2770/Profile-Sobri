@@ -5,6 +5,8 @@ const assetsToCache = [
     '/css/style.css',
     '/js/script.js',
     '/images/iqbal.jpeg',
+    '/images/icon-192.png',
+    '/images/icon-512.png',
     '/manifest.json'
 ];
 
